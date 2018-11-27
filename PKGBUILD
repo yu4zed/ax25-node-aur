@@ -1,6 +1,6 @@
 # Maintaner: Wijnand Modderman-Lenstra <maze@pyth0n.org>
 # Contributor: Gordon JC Pearce <gordon@gjcp.net>
-pkgname=node
+pkgname=ax25-node
 pkgver=0.3.2
 pkgrel=3
 pkgdesc="AX25 node software"
@@ -16,18 +16,19 @@ source=(
   node.patch
 )
 sha1sums=('810c950bd33a7f719a93be6c074ca2500c047af4'
-          '30bf44aee7d24ce76369cac3347b5b7b5bf6420c')
+          '384f6c798fa2d9d8b8bf9ab6cd589534bc212fb8')
 sha256sums=('41879021150084e2eb923f414dbd1082af1d46e10313a52137c9ce1e7eff64d5'
-            '5817890eefccb60394800af3febfbb6a3e372100e81c54ead96a5eeb14af3481')
+            '3e85c5972ef0754d82287ea6a3cf08679704b4ed66b180d57a23f9786bbb44a6')
 
 build() {
-  cd "$srcdir/$pkgname-$pkgver"
+  cd "$srcdir/node-$pkgver"
   patch -p1 < $srcdir/node.patch
   ./configure 
   make || return 1
 }
 
 package() {
-  cd "$srcdir/$pkgname-$pkgver"
+  cd "$srcdir/node-$pkgver"
   make DESTDIR="$pkgdir/" install
 }
+
